@@ -8,4 +8,4 @@ So that I can commit my first version into github
 Scenario: scenario description
 Given I have a story
 When I run the test
-Then A hello world message appears
+Then A Hello World message appears
