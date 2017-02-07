@@ -4,16 +4,22 @@ import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Pending;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by linfante on 2/7/2017.
  */
 public class RegistrationInDemoQASteps {
 
-    @Given("I open http://demoqa.com/registration/")
-    @Pending
-    public void givenIOpenHttpdemoqacomregistration() {
-        // PENDING
+    public WebDriver driver;
+
+    @Given("I open $url")
+    public void givenIOpenHttpdemoqacomregistration(String url) {
+        System.setProperty("webdriver.gecko.driver","C:\\Marionette\\geckodriver-v0.13.0-win64\\geckodriver.exe");
+        //driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver = new FirefoxDriver();
+        driver.get(url);
     }
 
     @When("I fill the registration form")
