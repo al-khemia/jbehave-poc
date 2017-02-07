@@ -1,4 +1,4 @@
-package jbehave;
+package jbehavepoc.steps;
 
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.Given;
