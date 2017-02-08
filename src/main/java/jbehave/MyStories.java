@@ -1,6 +1,7 @@
 package jbehave;
 
 import jbehavepoc.steps.MySteps;
+import jbehavepoc.steps.RegistrationInDemoQASteps;
 import org.jbehave.core.Embeddable;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
@@ -61,7 +62,7 @@ public class MyStories extends JUnitStories {
 
     @Override
     public InjectableStepsFactory stepsFactory() {
-        return new InstanceStepsFactory(configuration(), new MySteps());
+        return new InstanceStepsFactory(configuration(), new MySteps(), new RegistrationInDemoQASteps());
     }
 
     @Override
