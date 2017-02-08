@@ -1,14 +1,17 @@
 package jbehavepoc.steps;
 
+import jbehavepoc.utils.UtilsSteps;
 import org.jbehave.core.annotations.Given;
-import org.jbehave.core.annotations.Pending;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by linfante on 2/7/2017.
@@ -16,12 +19,13 @@ import org.openqa.selenium.support.ui.Select;
 public class RegistrationInDemoQASteps {
 
     public WebDriver driver;
+    public UtilsSteps utils;
 
     @Given("I open $url")
-    public void givenIOpenHttpdemoqacomregistration(String url) {
+    public void givenIOpenurl(String url) {
         System.setProperty("webdriver.gecko.driver","C:\\Marionette\\geckodriver-v0.13.0-win64\\geckodriver.exe");
-        //driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver = new FirefoxDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(url);
     }
 
@@ -61,10 +65,10 @@ public class RegistrationInDemoQASteps {
         driver.findElement(By.id("phone_9")).sendKeys("57315613790");
 
         //Enter a username
-        driver.findElement(By.id("username")).sendKeys("liroingo1");
+        driver.findElement(By.id("username")).sendKeys(utils.randomUser());
 
         //Enter an email
-        driver.findElement(By.id("email_1")).sendKeys("liroingo@gmail.com");
+        driver.findElement(By.id("email_1")).sendKeys(utils.randomUser()+"@example.com");
 
         //Loading a pic
 
@@ -82,14 +86,13 @@ public class RegistrationInDemoQASteps {
     @When("I submit the registration form")
     public void whenISubmitTheRegistrationForm() {
         //Submit form
-        driver.findElement(By.name("pie_submit")).submit();
+        driver.findElement(By.name("pie_submit")).click();
 
     }
 
-    @Then("A Thanks message is displayed")
-    @Pending
-    public void thenAThanksMessageIsDisplayed() {
-        // PENDING
+    @Then("$msg message is displayed")
+    public void thenAMessageIsDisplayed(String msg) {
+        //Assertion of message
+        Assert.assertEquals(driver.findElement(By.cssSelector("p.piereg_message")).getText(),msg);
     }
-
 }
