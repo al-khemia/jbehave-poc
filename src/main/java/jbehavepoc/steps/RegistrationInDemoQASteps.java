@@ -95,4 +95,16 @@ public class RegistrationInDemoQASteps {
         //Assertion of message
         Assert.assertEquals(driver.findElement(By.cssSelector("p.piereg_message")).getText(),msg);
     }
+
+    @Then("$msg Error messages are displayed")
+    public void thenErrorMessagesAreDisplayed(String msg) {
+        Assert.assertEquals(driver.findElement(By.cssSelector("span.legend.error")).getText(),msg);
+        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[3]/div/div[2]/span")).getText(),msg);
+        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[6]/div/div/span")).getText(),msg);
+        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[7]/div/div/span")).getText(),msg);
+        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[8]/div/div/span")).getText(),msg);
+        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[11]/div/div/span")).getText(),msg);
+        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[12]/div/div/span")).getText(),msg);
+    }
+
 }
