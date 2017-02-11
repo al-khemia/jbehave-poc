@@ -1,4 +1,4 @@
-package jbehavepoc.steps;
+package com.jbehavepoc.helloworld.steps;
 
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.Given;
@@ -8,7 +8,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 
-public class MySteps {
+public class HelloWorldSteps {
     private String msg_actual = "Hello World";
 
     @Given("I have a story")

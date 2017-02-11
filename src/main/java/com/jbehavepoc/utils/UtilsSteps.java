@@ -1,4 +1,4 @@
-package jbehavepoc.utils;
+package com.jbehavepoc.utils;
 
         import org.apache.commons.lang3.RandomStringUtils;
 

@@ -33,19 +33,29 @@
       <type>zip</type>
     </dependency>
     <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-api</artifactId>
-      <version>3.0.1</version>
+      <groupId>org.jbehave.web</groupId>
+      <artifactId>jbehave-web-selenium</artifactId>
+      <version>3.5.5</version>
     </dependency>
     <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>htmlunit-driver</artifactId>
-      <version>2.23.1</version>
+      <groupId>org.jbehave.web</groupId>
+      <artifactId>jbehave-web-io</artifactId>
+      <version>3.5.5</version>
     </dependency>
     <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-java</artifactId>
-      <version>3.0.1</version>
+      <groupId>org.jbehave.web</groupId>
+      <artifactId>jbehave-web-resources</artifactId>
+      <version>3.5.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jbehave.web</groupId>
+      <artifactId>jbehave-web-runner</artifactId>
+      <version>3.5.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jbehave.web</groupId>
+      <artifactId>jbehave-web-distribution</artifactId>
+      <version>3.5.5</version>
     </dependency>
   </dependencies>
 
