@@ -2,6 +2,7 @@ package com.jbehavepoc.stories;
 
 import com.jbehavepoc.selenium.steps.RegistrationInDemoQASteps;
 import com.thoughtworks.selenium.Selenium;
+import com.thoughtworks.selenium.condition.ConditionRunner;
 import org.jbehave.core.Embeddable;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
