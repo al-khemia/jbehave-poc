@@ -1,12 +1,10 @@
 package com.jbehavepoc.stories;
 
 import com.jbehavepoc.helloworld.steps.HelloWorldSteps;
-import com.jbehavepoc.selenium.steps.RegistrationInDemoQASteps;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.io.StoryFinder;
 import org.jbehave.core.junit.JUnitStories;
-import org.jbehave.core.junit.JUnitStory;
 import org.jbehave.core.reporters.Format;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.InjectableStepsFactory;
@@ -34,8 +32,7 @@ public class HelloWorldStory extends JUnitStories {
     @Override
     public InjectableStepsFactory stepsFactory() {
         return new InstanceStepsFactory(configuration(),
-                new HelloWorldSteps(),
-                new RegistrationInDemoQASteps());
+                new HelloWorldSteps());
     }
 
     @Override

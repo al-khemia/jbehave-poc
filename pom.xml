@@ -10,10 +10,13 @@
   <properties>
     <jbehave.core.version>4.1</jbehave.core.version>
     <jbehave.site.version>3.3</jbehave.site.version>
+    <selenium.java.version>3.0.1</selenium.java.version>
+    <htmlunit.driver.version>2.23</htmlunit.driver.version>
     <embeddables>**/*Stories.java</embeddables>
   </properties>
 
   <dependencies>
+    <!-- Jbehave dependencies -->
     <dependency>
       <groupId>org.jbehave</groupId>
       <artifactId>jbehave-core</artifactId>
@@ -32,30 +35,24 @@
       <version>${jbehave.site.version}</version>
       <type>zip</type>
     </dependency>
+
+    <!-- Dependencies that allow Jbehave to interact with Selenium-->
     <dependency>
       <groupId>org.jbehave.web</groupId>
       <artifactId>jbehave-web-selenium</artifactId>
       <version>3.5.5</version>
     </dependency>
+
+    <!-- Selenium dependencies -->
     <dependency>
-      <groupId>org.jbehave.web</groupId>
-      <artifactId>jbehave-web-io</artifactId>
-      <version>3.5.5</version>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>${selenium.java.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.jbehave.web</groupId>
-      <artifactId>jbehave-web-resources</artifactId>
-      <version>3.5.5</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jbehave.web</groupId>
-      <artifactId>jbehave-web-runner</artifactId>
-      <version>3.5.5</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jbehave.web</groupId>
-      <artifactId>jbehave-web-distribution</artifactId>
-      <version>3.5.5</version>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>htmlunit-driver</artifactId>
+      <version>${htmlunit.driver.version}</version>
     </dependency>
   </dependencies>
 

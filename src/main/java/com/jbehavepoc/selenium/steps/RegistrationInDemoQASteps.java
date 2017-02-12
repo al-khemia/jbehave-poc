@@ -9,9 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.Select;
-
 
 import java.util.concurrent.TimeUnit;
 
@@ -25,8 +23,7 @@ public class RegistrationInDemoQASteps {
 
     @Given("I open $url")
     public void givenIOpenurl(String url) {
-        //System.setProperty("webdriver.gecko.driver","C:\\Marionette\\geckodriver-v0.13.0-win64\\geckodriver.exe");
-        driver = new HtmlUnitDriver();
+        driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(url);
     }
@@ -108,5 +105,4 @@ public class RegistrationInDemoQASteps {
         Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[11]/div/div/span")).getText(),msg);
         Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[12]/div/div/span")).getText(),msg);
     }
-
 }
