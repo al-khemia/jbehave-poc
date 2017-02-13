@@ -1,0 +1,52 @@
+Scenario: Try to submit a registration with and empty form
+Given I open http://demoqa.com/registration/
+When I submit the registration form
+Then * This field is required Error messages are displayed
+
+
+!-- Scenario: Try to submit a registration with an invalid password
+!-- Given I open http://demoqa.com/registration/
+!-- When I fill the registration form
+!-- And I enter [firstname] and [lastname]
+!-- And I enter this [password]
+!-- And I submit the registration form
+!-- Then * Minimum 8 characters required email message is displayed
+
+!--Examples:
+!--|firstname|lastname|password|
+!--|Lina|Infante|12345|
+!--
+!--
+!--
+!--
+!--
+!--Scenario: Try to submit a registration with a mismatch password
+!--Given I open http://demoqa.com/registration/
+!--When I fill the registration form
+!--And I enter [firstname] and [lastname]
+!--And I enter this [password]
+!--And I enter confirmation [con_password]
+!--And I submit the registration form
+!--Then * Fields do not match email message is displayed
+!--
+!--Examples:
+!--|firstname|lastname|password|con_password|
+!--|Lina|Infante|12345|12345678|
+!--
+!--
+!--
+!--
+!--
+!--Scenario: Try to submit a registration with an invalid phone number
+!--Given I open http://demoqa.com/registration/
+!--When I fill the registration form
+!--And I enter [firstname] and [lastname]
+!--And I enter this [phoneNumber]
+!--And I enter this [password]
+!--And I submit the registration form
+!--Then * Fields do not match email message is displayed
+!--
+!--Examples:
+!--
+!--|firstname|lastname|password|phoneNumber|
+!--|Lina|Infante|12345|12345678|12345678|
