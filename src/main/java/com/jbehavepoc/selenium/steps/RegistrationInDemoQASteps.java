@@ -1,15 +1,16 @@
 package com.jbehavepoc.selenium.steps;
 
-import com.jbehavepoc.utils.UtilsSteps;
-import org.jbehave.core.annotations.*;
-import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
+        import com.jbehavepoc.utils.RegistrationUtils;
+        import org.jbehave.core.annotations.*;
+        import org.junit.Assert;
+        import org.openqa.selenium.By;
+        import org.openqa.selenium.WebDriver;
+        import org.openqa.selenium.WebElement;
+        import org.openqa.selenium.firefox.FirefoxDriver;
+        import org.openqa.selenium.support.ui.Select;
 
-import java.util.concurrent.TimeUnit;
+        import java.util.List;
+        import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -18,17 +19,20 @@ import java.util.concurrent.TimeUnit;
 public class RegistrationInDemoQASteps {
 
     public WebDriver driver;
-    public UtilsSteps utils;
+    public RegistrationUtils utils;
 
     @BeforeStories
-    public void beforeStories(){
+    public void beforeStories() {
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @Given("I open $url")
     public void givenIOpenurl(String url) {
-        System.setProperty("webdriver.gecko.driver","C:\\Marionette\\geckodriver-v0.13.0-win64\\geckodriver.exe");
+        //Firefox driver
+        System.setProperty("webdriver.gecko.driver", "C:\\Marionette\\geckodriver-v0.13.0-win64\\geckodriver.exe");
+        //Chrome driver
+        //System.setProperty("webdriver.chrome.driver", "C:\\Marionette\\chromedriver_win32\\chromedriver.exe");
         driver.get(url);
     }
 
@@ -42,25 +46,17 @@ public class RegistrationInDemoQASteps {
     @When("I choose [maritalStatus]")
     public void whenIChoosemaritalStatus(@Named("maritalStatus") String m_status) {
         //Radiobutton marital status
-        driver.findElement(By.cssSelector("[name='radio_4[]'][value='"+m_status+"'][type='radio']")).click();
+        if (!m_status.isEmpty()) {
+            driver.findElement(By.cssSelector("[name='radio_4[]'][value='" + m_status + "'][type='radio']")).click();
+        }
     }
 
-    @When("I like to [dance], [reading] and [cricket]")
-    public void whenIChoosehobbie(@Named("dance") Boolean dance, @Named("reading") Boolean reading, @Named("cricket") Boolean cricket) {
+    @When("I mark my [hobbies]")
+    public void whenIChoosehobbie(@Named("hobbies") List<String> hobbiesList) {
 
-        System.out.print("I like to execute the step"+dance+reading+cricket);
         //Checkbox hobby
-        if (dance==Boolean.TRUE){
-            driver.findElement(By.cssSelector("[name='checkbox_5[]'][value='dance'][type='checkbox']")).click();
-            System.out.print("dancign al kdjfldskjfldskjf "+dance);
-        }
-
-        if (reading==Boolean.TRUE){
-            driver.findElement(By.cssSelector("[name='checkbox_5[]'][value='reading'][type='checkbox']")).click();
-        }
-
-        if(cricket==Boolean.TRUE){
-            driver.findElement(By.cssSelector("[name='checkbox_5[]'][value='cricket '][type='checkbox']")).click();
+        for (int i = 0; i < hobbiesList.size(); i++) {
+            driver.findElement(By.xpath(RegistrationUtils.getHobbySelector(hobbiesList.get(i)))).click();
         }
     }
 
@@ -91,10 +87,9 @@ public class RegistrationInDemoQASteps {
     @When("I enter [username]")
     public void whenIEnterusername(@Named("username") String username) {
         //Enter a random username or username entered by story
-        if(username.isEmpty()){
-            driver.findElement(By.id("username")).sendKeys(UtilsSteps.randomUser());
-            System.out.print("is empty username"+username);
-        }else{
+        if (username.isEmpty()) {
+            driver.findElement(By.id("username")).sendKeys(RegistrationUtils.randomUser());
+        } else {
             driver.findElement(By.id("username")).sendKeys(username);
         }
 
@@ -103,10 +98,9 @@ public class RegistrationInDemoQASteps {
     @When("I enter [email]")
     public void whenIEnteremail(@Named("email") String email) {
         //Enter a random email or email entered by story
-        if(email.isEmpty()){
-            driver.findElement(By.id("email_1")).sendKeys(UtilsSteps.randomUser()+"@example.com");
-            System.out.print("is empty email"+email);
-        }else {
+        if (email.isEmpty()) {
+            driver.findElement(By.id("email_1")).sendKeys(RegistrationUtils.randomUser() + "@example.com");
+        } else {
             driver.findElement(By.id("email_1")).sendKeys(email);
         }
     }
@@ -123,8 +117,6 @@ public class RegistrationInDemoQASteps {
         //Enter password
         driver.findElement(By.id("password_2")).sendKeys(password);
 
-        //Enter password confirmation
-        driver.findElement(By.id("confirm_password_password_2")).sendKeys(password);
     }
 
     @When("I enter confirmation [con_password]")
@@ -156,19 +148,48 @@ public class RegistrationInDemoQASteps {
 
     @Then("$msg Error messages are displayed")
     public void thenErrorMessagesAreDisplayed(String msg) {
-        Assert.assertEquals(driver.findElement(By.cssSelector("span.legend.error")).getText(),msg);
-        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[3]/div/div[2]/span")).getText(),msg);
-        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[6]/div/div/span")).getText(),msg);
-        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[7]/div/div/span")).getText(),msg);
-        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[8]/div/div/span")).getText(),msg);
-        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[11]/div/div/span")).getText(),msg);
-        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[12]/div/div/span")).getText(),msg);
+        Assert.assertEquals(driver.findElement(By.cssSelector("span.legend.error")).getText(), msg);
+        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[3]/div/div[2]/span")).getText(), msg);
+        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[6]/div/div/span")).getText(), msg);
+        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[7]/div/div/span")).getText(), msg);
+        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[8]/div/div/span")).getText(), msg);
+        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[11]/div/div/span")).getText(), msg);
+        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[12]/div/div/span")).getText(), msg);
     }
 
-    @Then("$msg email message is displayed")
-    public void thenEmailMessageIsDisplayed(String msg) {
+    @Then("A [emailError] is displayed")
+    public void thenEmailErrorIsDisplayed(@Named("emailError") String msg) {
         //Assertion of message
-        Assert.assertEquals(driver.findElement(By.xpath("id('pie_register')/x:li[12]/x:div/x:div/x:span")).getText(),msg);
+        Assert.assertEquals(driver.findElement(By.cssSelector("p.piereg_login_error")).getText(), msg);
     }
 
+    @Then("An [invalidEmailError] is displayed")
+    public void thenInvalidEmailErrorIsDisplayed(@Named("invalidEmailError") String msg) {
+        //Assertion of message
+        Assert.assertEquals(driver.findElement(By.cssSelector("span.legend.error")).getText(), msg);
+    }
+
+    @Then("A [phoneNumberError] is displayed")
+    public void thenAphoneNumberErrorIsDisplayed(@Named("phoneNumberError") String msg) {
+        //Assertion of message
+        Assert.assertEquals(driver.findElement(By.cssSelector("span.legend.error")).getText(), msg);
+    }
+
+    @Then("A [usernameError] is displayed")
+    public void thenAusernameErrorIsDisplayed(@Named("usernameError") String msg) {
+        //Assertion of message
+        Assert.assertEquals(driver.findElement(By.cssSelector("p.piereg_login_error")).getText(), msg);
+    }
+
+    @Then("A [passwordError] is displayed")
+    public void thenApasswordErrorIsDisplayed(@Named("passwordError") String msg) {
+        //Assertion of message
+        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[11]/div/div/span")).getText(), msg);
+    }
+
+    @Then("A [mismatchError] is displayed")
+    public void thenAmismatchPasswordErrorIsDisplayed(@Named("mismatchError") String msg) {
+        //Assertion of message
+        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[12]/div/div/span")).getText(), msg);
+    }
 }

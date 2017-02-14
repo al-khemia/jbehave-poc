@@ -30,7 +30,7 @@ public class SeleniumStory extends JUnitStories {
                 .useStoryReporterBuilder(
                         new StoryReporterBuilder()
                                 .withDefaultFormats()
-                                .withFormats(Format.CONSOLE, Format.TXT, Format.HTML)
+                                .withFormats(Format.CONSOLE, Format.HTML)
                 );
     }
 
