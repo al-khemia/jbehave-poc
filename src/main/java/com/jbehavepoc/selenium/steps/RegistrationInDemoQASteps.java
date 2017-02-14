@@ -1,4 +1,4 @@
-package jbehavepoc.steps;
+package com.jbehavepoc.selenium.steps;
 
 import com.jbehavepoc.utils.UtilsSteps;
 import org.jbehave.core.annotations.*;
