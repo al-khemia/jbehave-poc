@@ -1,8 +1,17 @@
 Meta:
 
-As a user
+As a tester
 I want to fill the registration form
 So that I can submit the form
+
+Scenario: Try to submit a registration with an invalid image
+Given I open http://demoqa.com/registration/
+When I upload an [image]
+And I submit the registration form
+Then A [imageError] is displayed
+Examples:
+|image|imageError|
+|\src\main\resources\img\github_128.pdf|* Invalid File|
 
 Scenario: Register an user
 Given I open http://demoqa.com/registration/
@@ -29,9 +38,32 @@ Examples:
 |фанасий|фотобанк|divorced|reading,dancing|Chile|1|1|1999|||0492515300519|6;78Z9cW|6;78Z9cW|Thank you for your registration|
 |Ernest|Laurence|single|cricket,dancing,reading|Canada|9|8|1982|||0492515300519|6;78Z9cW|6;78Z9cW|Thank you for your registration|
 |Ernest|Laurence|single|cricket,dancing,reading|Canada|9|8|1982|||0492515300519|6;78Z9cW|6;78Z9cW|Thank you for your registration|
+|Edubijes|Laurence|single|cricket,dancing,reading|Canada|9|8|1982|||0492515300519|6;78Z9cW|6;78Z9cW|Thank you for your registration|
 |-- MARITALSTATUS=single, married, divorced, Empty
 |-- HOBBIES=1, 2, 3
+|-- UPLOAD IMAGE
 |-- NOTES: username and email will be randomly generated if you left these fields empty
+
+Scenario: Register an user
+Given I open http://demoqa.com/registration/
+When I enter [firstname] and [lastname]
+And I choose [maritalStatus]
+And I mark my [hobbies]
+And I select [country]
+And I select Date of Birth [dd] [mm] [aaaa]
+And I enter [username]
+And I enter [email]
+And I enter this [phoneNumber]
+And I enter this [password]
+And I enter confirmation [con_password]
+And I upload an [image]
+And I enter a bio
+And I submit the registration form
+Then A [message] is displayed
+
+Examples:
+|firstname|lastname|maritalStatus|hobbies|country|dd|mm|aaaa|username|email|phoneNumber|password|con_password|message|image|
+|Albert|Einstein|single|dancing|Germany|14|3|1950|||0492515300519|6;78Z9cW|6;78Z9cW|Thank you for your registration|\src\main\resources\img\img\github_128.png|
 
 Scenario: Try to register an user with invalid phone number data
 Given I open http://demoqa.com/registration/
@@ -159,10 +191,13 @@ Examples:
 |firstname|lastname|maritalStatus|hobbies|country|dd|mm|aaaa|username|email|phoneNumber|password|con_password|mismatchError|
 |Ernest|Laurence|single|cricket,dancing,reading|Canada|9|8|1982|||0492515300519|6;78Z9cW|6;78Z9cM|* Fields do not match|
 
+
 Scenario: Try to submit a registration with and empty form
 Given I open http://demoqa.com/registration/
 When I submit the registration form
 Then * This field is required Error messages are displayed
+
+
 
 
 

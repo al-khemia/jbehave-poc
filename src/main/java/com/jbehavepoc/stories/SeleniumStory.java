@@ -1,6 +1,6 @@
 package com.jbehavepoc.stories;
 
-import com.jbehavepoc.selenium.steps.RegistrationInDemoQASteps;
+import com.jbehavepoc.selenium.steps.Registration;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.io.StoryFinder;
@@ -37,7 +37,7 @@ public class SeleniumStory extends JUnitStories {
     @Override
     public InjectableStepsFactory stepsFactory() {
         return new InstanceStepsFactory(configuration(),
-                new RegistrationInDemoQASteps());
+                new Registration());
     }
 
     @Override
