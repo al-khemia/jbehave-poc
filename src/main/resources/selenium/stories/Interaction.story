@@ -7,5 +7,5 @@ So that I can move them into the page
 
 Scenario: scenario description
 Given I open http://demoqa.com/draggable/
-When I do something
-Then system is in a different state
+When I drag a box
+Then The box has changed the position
