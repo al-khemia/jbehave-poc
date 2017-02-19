@@ -10,6 +10,7 @@ import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.jbehave.core.steps.InstanceStepsFactory;
 
+
 import java.util.List;
 
 import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
@@ -29,7 +30,7 @@ public class SeleniumStory extends JUnitStories {
                 .useStoryReporterBuilder(
                         new StoryReporterBuilder()
                                 .withDefaultFormats()
-                                .withFormats(Format.CONSOLE, Format.TXT, Format.HTML)
+                                .withFormats(Format.CONSOLE, Format.HTML)
                 );
     }
 
