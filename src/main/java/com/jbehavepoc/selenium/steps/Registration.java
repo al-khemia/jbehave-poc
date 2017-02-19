@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -18,22 +19,22 @@ import java.util.concurrent.TimeUnit;
  */
 public class Registration {
 
-    public WebDriver driver;
+    private WebDriver driver;
     public RegistrationUtils utils;
 
     @BeforeStories
     public void beforeStories() {
-        driver = new FirefoxDriver();
+        //Firefox driver
+        //System.setProperty("webdriver.gecko.driver", "C:\\Marionette\\geckodriver-v0.13.0-win64\\geckodriver.exe");
+        //Chrome driver
+        System.setProperty("webdriver.chrome.driver", "C:\\Marionette\\chromedriver_win32\\chromedriver.exe");
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @Given("I open $url")
     public void givenIOpenurl(String url) {
-        //Firefox driver
-        System.setProperty("webdriver.gecko.driver", "C:\\Marionette\\geckodriver-v0.13.0-win64\\geckodriver.exe");
-        //Chrome driver
-        //System.setProperty("webdriver.chrome.driver", "C:\\Marionette\\chromedriver_win32\\chromedriver.exe");
-        driver.get(url);
+       driver.get(url);
     }
 
     @When("I enter [firstname] and [lastname]")

@@ -1,5 +1,6 @@
 package com.jbehavepoc.stories;
 
+import com.jbehavepoc.selenium.steps.Interaction;
 import com.jbehavepoc.selenium.steps.Registration;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
@@ -19,7 +20,7 @@ import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
 /**
  * Created by linfante on 2/10/2017.
  */
-public class SeleniumStory extends JUnitStories {
+public class SeleniumStories extends JUnitStories {
 
     private static final String STORY_PATH = "**/selenium/stories/*.story";
     private static final String EXCLUDED_PATH = "**/selenium/stories/excluded/*.story";
@@ -37,7 +38,7 @@ public class SeleniumStory extends JUnitStories {
     @Override
     public InjectableStepsFactory stepsFactory() {
         return new InstanceStepsFactory(configuration(),
-                new Registration());
+                new Registration(), new Interaction());
     }
 
     @Override

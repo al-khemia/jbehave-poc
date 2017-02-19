@@ -4,15 +4,6 @@ As a tester
 I want to fill the registration form
 So that I can submit the form
 
-Scenario: Try to submit a registration with an invalid image
-Given I open http://demoqa.com/registration/
-When I upload an [image]
-And I submit the registration form
-Then A [imageError] is displayed
-Examples:
-|image|imageError|
-|\src\main\resources\img\github_128.pdf|* Invalid File|
-
 Scenario: Register an user
 Given I open http://demoqa.com/registration/
 When I enter [firstname] and [lastname]
@@ -191,6 +182,14 @@ Examples:
 |firstname|lastname|maritalStatus|hobbies|country|dd|mm|aaaa|username|email|phoneNumber|password|con_password|mismatchError|
 |Ernest|Laurence|single|cricket,dancing,reading|Canada|9|8|1982|||0492515300519|6;78Z9cW|6;78Z9cM|* Fields do not match|
 
+Scenario: Try to submit a registration with an invalid image
+Given I open http://demoqa.com/registration/
+When I upload an [image]
+And I submit the registration form
+Then A [imageError] is displayed
+Examples:
+|image|imageError|
+|\src\main\resources\img\github_128.pdf|* Invalid File|
 
 Scenario: Try to submit a registration with and empty form
 Given I open http://demoqa.com/registration/
