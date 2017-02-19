@@ -1,6 +1,5 @@
 package com.jbehavepoc.selenium.steps;
 
-import com.jbehavepoc.utils.RegistrationUtils;
 import org.jbehave.core.annotations.*;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -15,11 +14,13 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by linfante on 2/17/2017.
  */
-public class  Interaction{
+public class  Interaction {
 
     private WebDriver driver;
     private Point initial_point;
-    private WebElement box;
+    private WebElement dragBox_we;
+    private String url;
+    private String dropBox_text;
 
     @BeforeStories
     public void beforeStories() {
@@ -31,24 +32,39 @@ public class  Interaction{
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    @Given("I open $url")
-    public void givenIOpenurl(String url) {
-        driver.get(url);
+    @Given("I open $browser_url")
+    public void givenIOpenurl(String browser_url) {
+        url = browser_url;
+        driver.get(browser_url);
     }
 
     @When("I drag a box $x to the right and $y below")
-    public void whenIDragABox(Integer x, Integer y){
-        box = driver.findElement(By.id("draggable"));
-        initial_point=  box.getLocation();
+    public void whenIDragABox(Integer x, Integer y) {
+        dragBox_we = driver.findElement(By.id("draggable"));
+        initial_point = dragBox_we.getLocation();
 
         Actions builder = new Actions(driver);
-        builder.dragAndDropBy(box,x,y).perform();
+        builder.dragAndDropBy(dragBox_we, x, y).perform();
+    }
+
+    @When("I drag a box with a target")
+    public void thenIDragABoxWithATarget() {
+        dragBox_we = driver.findElement(By.id("draggableview"));
+        dropBox_text = driver.findElement(By.id("droppableview")).getText();
+
+        Actions builder = new Actions(driver);
+        builder.dragAndDropBy(dragBox_we, 150, 40).perform();
     }
 
     @Then("The box has changed the position")
     public void thenTheBoxHasChangedThePosition() {
-        Assert.assertNotEquals("Box hasn´t changed position",initial_point,box.getLocation());
+        Assert.assertNotEquals("Box hasn´t changed position", initial_point, dragBox_we.getLocation());
     }
 
-
+    @Then("Target has changed its text")
+    public void thenTargetHasChangedItsText() {
+        Assert.assertNotEquals("Box hasn´t changed text", dropBox_text, driver.findElement(By.id("droppableview")).getText());
+    }
 }
+
+
