@@ -1,39 +1,40 @@
 package com.jbehavepoc.selenium.steps;
 
-        import com.jbehavepoc.utils.RegistrationUtils;
-        import org.jbehave.core.annotations.*;
-        import org.junit.Assert;
-        import org.openqa.selenium.By;
-        import org.openqa.selenium.WebDriver;
-        import org.openqa.selenium.WebElement;
-        import org.openqa.selenium.firefox.FirefoxDriver;
-        import org.openqa.selenium.support.ui.Select;
+import com.jbehavepoc.utils.RegistrationUtils;
+import org.jbehave.core.annotations.*;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
-        import java.util.List;
-        import java.util.concurrent.TimeUnit;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 /**
  * Created by linfante on 2/7/2017.
  */
-public class RegistrationInDemoQASteps {
+public class Registration {
 
-    public WebDriver driver;
+    private WebDriver driver;
     public RegistrationUtils utils;
 
     @BeforeStories
     public void beforeStories() {
-        driver = new FirefoxDriver();
+        //Firefox driver
+        //System.setProperty("webdriver.gecko.driver", "C:\\Marionette\\geckodriver-v0.13.0-win64\\geckodriver.exe");
+        //Chrome driver
+        System.setProperty("webdriver.chrome.driver", "C:\\Marionette\\chromedriver_win32\\chromedriver.exe");
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @Given("I open $url")
     public void givenIOpenurl(String url) {
-        //Firefox driver
-        System.setProperty("webdriver.gecko.driver", "C:\\Marionette\\geckodriver-v0.13.0-win64\\geckodriver.exe");
-        //Chrome driver
-        //System.setProperty("webdriver.chrome.driver", "C:\\Marionette\\chromedriver_win32\\chromedriver.exe");
-        driver.get(url);
+       driver.get(url);
     }
 
     @When("I enter [firstname] and [lastname]")
@@ -140,10 +141,18 @@ public class RegistrationInDemoQASteps {
 
     }
 
+    @When("I upload an [image]")
+    public void whenIuploadAnImage(@Named("image") String img){
+        //Submit form
+        String filePath = System.getProperty("user.dir") + img;
+        System.out.print(filePath);
+        driver.findElement(By.id("profile_pic_10")).sendKeys(filePath);
+    }
+
     @Then("A [message] is displayed")
     public void thenAMessageIsDisplayed(@Named("message") String msg) {
         //Assertion of message
-        Assert.assertEquals(driver.findElement(By.cssSelector("p.piereg_message")).getText(),msg);
+        Assert.assertEquals(driver.findElement(By.cssSelector("p.piereg_message")).getText(), msg);
     }
 
     @Then("$msg Error messages are displayed")
@@ -192,4 +201,11 @@ public class RegistrationInDemoQASteps {
         //Assertion of message
         Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[12]/div/div/span")).getText(), msg);
     }
+
+    @Then("A [imageError] is displayed")
+    public void thenImageErrorIsDisplayed(@Named("imageError") String msg) {
+        //Assertion of message
+        Assert.assertEquals(driver.findElement(By.xpath("//ul[@id='pie_register']/li[9]/div/div/span")).getText(), msg);
+    }
+
 }
