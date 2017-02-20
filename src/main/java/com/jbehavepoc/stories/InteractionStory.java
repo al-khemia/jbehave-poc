@@ -4,19 +4,12 @@ import com.jbehavepoc.selenium.steps.Interaction;
 import org.jbehave.core.Embeddable;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
-import org.jbehave.core.io.StoryFinder;
 import org.jbehave.core.io.StoryPathResolver;
-import org.jbehave.core.io.UnderscoredCamelCaseResolver;
-import org.jbehave.core.junit.JUnitStories;
 import org.jbehave.core.junit.JUnitStory;
 import org.jbehave.core.reporters.Format;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.jbehave.core.steps.InstanceStepsFactory;
-
-import java.util.List;
-
-import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
 
 /**
  * Created by linfante on 2/17/2017.
