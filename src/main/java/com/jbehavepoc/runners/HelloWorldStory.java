@@ -1,14 +1,10 @@
-package com.jbehavepoc.stories;
+package com.jbehavepoc.runners;
 
-import com.jbehavepoc.selenium.steps.Interaction;
-import org.jbehave.core.Embeddable;
+import com.jbehavepoc.helloworld.steps.HelloWorldSteps;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.io.StoryFinder;
-import org.jbehave.core.io.StoryPathResolver;
-import org.jbehave.core.io.UnderscoredCamelCaseResolver;
 import org.jbehave.core.junit.JUnitStories;
-import org.jbehave.core.junit.JUnitStory;
 import org.jbehave.core.reporters.Format;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.InjectableStepsFactory;
@@ -18,10 +14,10 @@ import java.util.List;
 
 import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
 
-/**
- * Created by linfante on 2/17/2017.
- */
-public class InteractionStory extends JUnitStory {
+public class HelloWorldStory extends JUnitStories {
+
+    private static final String STORY_PATH = "**/helloworld/stories/*.story";
+    private static final String EXCLUDED_PATH = "**/helloworld/stories/excluded/*.story";
 
     @Override
     public Configuration configuration(){
@@ -29,19 +25,19 @@ public class InteractionStory extends JUnitStory {
                 .useStoryReporterBuilder(
                         new StoryReporterBuilder()
                                 .withDefaultFormats()
-                                .withFormats(Format.CONSOLE, Format.HTML))
-                .useStoryPathResolver(new StoryPathResolver() {
-                    @Override
-                    public String resolve(Class<? extends Embeddable> embeddableClass) {
-                        return "selenium/stories/Interaction.story";
-                    }
-                });
+                                .withFormats(Format.CONSOLE, Format.TXT)
+                );
     }
 
     @Override
     public InjectableStepsFactory stepsFactory() {
-        return new InstanceStepsFactory(configuration()
-                , new Interaction());
+        return new InstanceStepsFactory(configuration(),
+                new HelloWorldSteps());
     }
 
+    @Override
+    protected List<String> storyPaths() {
+        return new StoryFinder()
+                .findPaths(codeLocationFromClass(this.getClass()), STORY_PATH, EXCLUDED_PATH);
+    }
 }

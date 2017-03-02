@@ -1,4 +1,4 @@
-package com.jbehavepoc.stories;
+package com.jbehavepoc.runners;
 
 import com.jbehavepoc.selenium.steps.Registration;
 import org.jbehave.core.Embeddable;
